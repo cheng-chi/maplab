@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # Get the current directory.
 script_source=$(readlink -f "$0")
