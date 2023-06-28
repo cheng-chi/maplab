@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Script to run ROVIOLI from a CLA rosbag data source.
+# Usage: tutorial_cla <output save folder> <rosbag path> [<additional rovioli flags>]
+# echo $ROVIO_CONFIG_DIR
+
+LOCALIZATION_MAP_OUTPUT=$1
+ROSBAG=$2
+NCAMERA_CALIBRATION="/maplab/data/cla/calibration/cla_mono.yaml"
+REST=$@
+
+rosrun rovioli rovioli \
+  --alsologtostderr=1 \
+  --v=2 \
+  --sensor_calibration_file=$NCAMERA_CALIBRATION \
+  --datasource_type="rosbag" \
+  --save_map_folder="$LOCALIZATION_MAP_OUTPUT" \
+  --optimize_map_to_localization_map=false \
+  --map_builder_save_image_as_resources=false \
+  --datasource_rosbag=$ROSBAG $REST \
+  --rovio_enable_frame_visualization=false
